@@ -1,5 +1,6 @@
 const puppeteer = require("puppeteer");
 
+module.exports = function(app) {
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -22,3 +23,4 @@ const puppeteer = require("puppeteer");
 
   await browser.close();
 })();
+};
