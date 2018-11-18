@@ -4,16 +4,16 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "if-env NODE_ENV=production && yarn start:prod || yarn start:dev",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
-    "start:dev": "concurrently \"nodemon --ignore 'client/*' server.js\" \"yarn client\"",
-    "client": "cd frontend && yarn build:dev",
-    "install": "cd frontend && yarn install",
-    "build": "cd frontend && yarn build",
-    "heroku-postbuild": "yarn build",
-    "lint": "eslint \"**/*.js\" --quiet && cd frontend && yarn lint",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*' server.js\" \"npm run client\"",
+    "client": "cd frontend && npm run build:dev",
+    "install": "cd frontend && npm run install",
+    "build": "cd frontend && npm run build",
+    "heroku-postbuild": "npm run build",
+    "lint": "eslint \"**/*.js\" --quiet && cd frontend && npm lint",
     "fix": "eslint \"**/*.js\" --fix .",
-    "test": "yarn lint && NODE_ENV=test mocha -u tdd --reporter spec --exit"
+    "test": "npm lint && NODE_ENV=test mocha -u tdd --reporter spec --exit"
   },
   "repository": {
     "type": "git",
