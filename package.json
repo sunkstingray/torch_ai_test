@@ -9,7 +9,7 @@
     "start:dev": "concurrently \"nodemon --ignore 'client/*' server.js\" \"npm run client\"",
     "client": "cd frontend && npm run build:dev",
     "install": "cd frontend && npm install",
-    "build": "cd frontend && npm run build",
+    "build": "cd frontend && npm build",
     "heroku-postbuild": "npm run build",
     "lint": "eslint \"**/*.js\" --quiet && cd frontend && npm lint",
     "fix": "eslint \"**/*.js\" --fix .",
