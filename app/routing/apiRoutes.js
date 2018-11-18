@@ -1,5 +1,7 @@
+// Dependencies
 const puppeteer = require("puppeteer");
 
+// Object to hold scraped data
 const resultsObject = {
   Titles: [],
   Names: [],
@@ -7,8 +9,7 @@ const resultsObject = {
   Companies: []
 }
 
-// const currentKey = ""
-
+// Function to build results object using headings to sort
 function makeObject(results) {
   let currentKey = "";
   let itemsProcessed = 0;
@@ -21,40 +22,19 @@ function makeObject(results) {
   for (let i = 0; i < results.length; i++) {
     itemsProcessed++;
 
-    console.log("element: "+results[i]+"IP"+itemsProcessed);
-
     if (results[i] === "Titles" || results[i] === "Names"  || results[i] === "Keywords"  || results[i] === "Companies") {
       currentKey = results[i];
-      console.log("key: "+currentKey);
     } else {
-      console.log("pushed element: "+results[i]);
       resultsObject[currentKey].push(results[i]);
     }
 
     if(itemsProcessed === results.length) {
-      console.log("!!!"+JSON.stringify(resultsObject));
       return resultsObject;
     }
   }
-
-  // results.forEach(element => {
-  //   itemsProcessed++;
-  //   console.log("element: "+element);
-  //   if (element = "Titles" || "Names"  || "Keywords"  || "Companies") {
-  //     currentKey = element;
-  //     console.log("key: "+currentKey);
-  //   }
-  //   else {
-  //     console.log("pushed element: "+element);
-  //     resultsObject[currentKey].push(element);
-  //   }
-  //   if(itemsProcessed === results.length) {
-  //     console.log(resultsObject);
-  //     return resultsObject;
-  //   }
-  // });
 }
 
+// API path for to return scraped data to frontend
 module.exports = function(app) {
 
   app.post("/api/search", async function(req, res) {

@@ -29,19 +29,19 @@
         <li v-for="item in searchResults.Titles" :key="item">{{ item }}</li>
       </ul>
     </div>
-        <div v-if="resultsSeen" class="box">
+    <div v-if="resultsSeen" class="box">
       <h3 class="title is-3">Names</h3>
       <ul>
         <li v-for="item in searchResults.Names" :key="item">{{ item }}</li>
       </ul>
     </div>
-        <div v-if="resultsSeen" class="box">
+    <div v-if="resultsSeen" class="box">
       <h3 class="title is-3">Keywords</h3>
       <ul>
         <li v-for="item in searchResults.Keywords" :key="item">{{ item }}</li>
       </ul>
     </div>
-        <div v-if="resultsSeen" class="box">
+    <div v-if="resultsSeen" class="box">
       <h3 class="title is-3">Companies</h3>
       <ul>
         <li v-for="item in searchResults.Companies" :key="item">{{ item }}</li>
@@ -77,7 +77,6 @@ export default {
         search: searchTerm,
       })
       .then(response => {
-        console.log("response: "+response.data);
         this.searchResults = response.data;
         this.resultsSeen = true;
         this.iconSeen = false;
