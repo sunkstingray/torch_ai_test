@@ -1,7 +1,6 @@
 const puppeteer = require("puppeteer");
 
 module.exports = function(app) {
-  // bodyParser = require('body-parser').json();
 
   app.post("/api/search", async function(req, res) {
     const browser = await puppeteer.launch();
@@ -20,17 +19,13 @@ module.exports = function(app) {
         document.querySelectorAll("td.result_text, h3.findSectionHeader")
       )
         .map(result => result.innerText.trim())
-        .map(result => result.replace("\n", " "))
-        .map(result => result.replace("\"", "- "))
-        .map(result => result.replace("\"", ""))
+        .map(result => result.replace(/\n/g, " "))
+        .map(result => result.replace(/\"/g, "'"))
     );
-
-    console.log(search);
 
     await browser.close();
 
     await res.json(search);
 
-    console.log("req.body: " + req.body.search);
   });
 };

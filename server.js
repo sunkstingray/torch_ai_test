@@ -1,8 +1,3 @@
-// ==============================================================================
-// DEPENDENCIES
-// Series of npm packages that we will use to give our server useful functionality
-// ==============================================================================
-
 const express = require("express");
 
 
@@ -15,12 +10,13 @@ const express = require("express");
 const app = express();
 
 // Sets an initial port. We"ll use this later in our listener
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8080;
 
 // express.json and express.urlEncoded make it easy for our server to interpret data sent to it.
 // The code below is pretty standard.
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('frontend/dist'));
 
 // ================================================================================
 // ROUTER
@@ -29,7 +25,12 @@ app.use(express.json());
 // ================================================================================
 
 require("./app/routing/apiRoutes")(app);
-require("./app/routing/htmlRoutes")(app);
+// require("./app/routing/htmlRoutes")(app);
+
+// Catch-all route
+app.get('*', (req, res) => {
+  res.redirect('/');
+});
 
 // ==============================================================================
 // LISTENER
