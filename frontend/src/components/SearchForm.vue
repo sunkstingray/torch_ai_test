@@ -1,35 +1,53 @@
 <template>
-<div class="container is-fluid">
-    <section class="hero is-light is-bold">
+<div class="container">
+    <section class="hero is-success is-bold main-header">
     <div class="hero-body">
       <div class="container">
         <h1 class="title is-1">{{ msg }}</h1>
-                <form class="field has-addons" v-on:submit.prevent>
-        <div class="control is-expanded">
+        <p>Use the field below to scrape IMDB for Movies, TV Shows, Celebrities and more with Puppeteer.</p>
+        <br>
+        <form class="field has-addons has-addons-centered" v-on:submit.prevent>
+          <div class="control">
             <input class="input" v-model="searchTerm" type="text" name="search" placeholder="Search"><br>
-        </div>
-        <div class="control">
-          <button class="button is-success control" type="submit" v-on:click="scrape(searchTerm)">Submit</button>
-        </div>
-        </form>
+          </div>
+          <div class="control">
+            <button class="button is-warning control" type="submit" v-on:click="scrape(searchTerm)">Submit</button>
+          </div>
+      </form>
       </div>
     </div>
     </section>
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container">
-
-      </div>
-    </div>
-  </section>
-    <p>
-      <span v-if="iconSeen" class="icon is-large">
+  <section class="container">
+    <p class="spinner" v-if="iconSeen">
+      <span  class="icon is-large">
         <i class="fas fa-3x fa-spinner fa-pulse"></i>
       </span>
     </p>
-    <ul v-if="resultsSeen">
-      <li v-for="item in searchResults" :key="item">{{ item }}</li>
-    </ul>
+    <div v-if="resultsSeen" class="box top-box">
+      <h3 class="title is-3">Titles</h3>
+      <ul>
+        <li v-for="item in searchResults.Titles" :key="item">{{ item }}</li>
+      </ul>
+    </div>
+        <div v-if="resultsSeen" class="box">
+      <h3 class="title is-3">Names</h3>
+      <ul>
+        <li v-for="item in searchResults.Names" :key="item">{{ item }}</li>
+      </ul>
+    </div>
+        <div v-if="resultsSeen" class="box">
+      <h3 class="title is-3">Keywords</h3>
+      <ul>
+        <li v-for="item in searchResults.Keywords" :key="item">{{ item }}</li>
+      </ul>
+    </div>
+        <div v-if="resultsSeen" class="box">
+      <h3 class="title is-3">Companies</h3>
+      <ul>
+        <li v-for="item in searchResults.Companies" :key="item">{{ item }}</li>
+      </ul>
+    </div>
+  </section>
 </div>
 </template>
 
@@ -74,4 +92,37 @@ export default {
   }
 };
 </script>
+
+<style>
+.main-header {
+  background-image: url('../assets/rogueone.jpg') !important;
+  object-fit: cover;
+}
+.box {
+  background-color: #f9f9f9 !important;
+}
+
+h1, h2, h3 {
+  font-family: 'Days One', sans-serif;
+  color: #076772 !important;
+}
+
+h3 {
+  background-color: #dfe8ee;
+  padding: 10px !important;
+}
+
+input {
+  width: 70vw !important;
+}
+
+.spinner {
+  padding-top: 100px;
+}
+
+.top-box {
+  margin-top: 20px;
+}
+</style>
+
 

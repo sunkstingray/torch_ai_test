@@ -1,5 +1,60 @@
 const puppeteer = require("puppeteer");
 
+const resultsObject = {
+  Titles: [],
+  Names: [],
+  Keywords: [],
+  Companies: []
+}
+
+// const currentKey = ""
+
+function makeObject(results) {
+  let currentKey = "";
+  let itemsProcessed = 0;
+
+  resultsObject.Titles = [];
+  resultsObject.Names = [];
+  resultsObject.Keywords = [];
+  resultsObject.Companies = [];
+
+  for (let i = 0; i < results.length; i++) {
+    itemsProcessed++;
+
+    console.log("element: "+results[i]+"IP"+itemsProcessed);
+
+    if (results[i] === "Titles" || results[i] === "Names"  || results[i] === "Keywords"  || results[i] === "Companies") {
+      currentKey = results[i];
+      console.log("key: "+currentKey);
+    } else {
+      console.log("pushed element: "+results[i]);
+      resultsObject[currentKey].push(results[i]);
+    }
+
+    if(itemsProcessed === results.length) {
+      console.log("!!!"+JSON.stringify(resultsObject));
+      return resultsObject;
+    }
+  }
+
+  // results.forEach(element => {
+  //   itemsProcessed++;
+  //   console.log("element: "+element);
+  //   if (element = "Titles" || "Names"  || "Keywords"  || "Companies") {
+  //     currentKey = element;
+  //     console.log("key: "+currentKey);
+  //   }
+  //   else {
+  //     console.log("pushed element: "+element);
+  //     resultsObject[currentKey].push(element);
+  //   }
+  //   if(itemsProcessed === results.length) {
+  //     console.log(resultsObject);
+  //     return resultsObject;
+  //   }
+  // });
+}
+
 module.exports = function(app) {
 
   app.post("/api/search", async function(req, res) {
@@ -25,7 +80,9 @@ module.exports = function(app) {
 
     await browser.close();
 
-    await res.json(search);
+    let searchResults = await makeObject(search);
+
+    await res.json(searchResults);
 
   });
 };
