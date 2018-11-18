@@ -8,7 +8,7 @@
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*' server.js\" \"npm run client\"",
     "client": "cd frontend && npm run build:dev",
-    "install": "cd frontend && npm run install",
+    "install": "cd frontend && npm install",
     "build": "cd frontend && npm run build",
     "heroku-postbuild": "npm run build",
     "lint": "eslint \"**/*.js\" --quiet && cd frontend && npm lint",
