@@ -7,7 +7,7 @@ const resultsObject = {
   Names: [],
   Keywords: [],
   Companies: []
-}
+};
 
 // Function to build results object using headings to sort into groups
 function makeObject(results) {
@@ -22,13 +22,18 @@ function makeObject(results) {
   for (let i = 0; i < results.length; i++) {
     itemsProcessed++;
 
-    if (results[i] === "Titles" || results[i] === "Names"  || results[i] === "Keywords"  || results[i] === "Companies") {
+    if (
+      results[i] === "Titles" ||
+      results[i] === "Names" ||
+      results[i] === "Keywords" ||
+      results[i] === "Companies"
+    ) {
       currentKey = results[i];
     } else {
       resultsObject[currentKey].push(results[i]);
     }
 
-    if(itemsProcessed === results.length) {
+    if (itemsProcessed === results.length) {
       return resultsObject;
     }
   }
@@ -36,9 +41,8 @@ function makeObject(results) {
 
 // API path for to return scraped data to frontend
 module.exports = function(app) {
-
   app.post("/api/search", async function(req, res) {
-    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+    const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
     const page = await browser.newPage();
     const url = "https://www.imdb.com";
 
@@ -63,6 +67,5 @@ module.exports = function(app) {
     let searchResults = await makeObject(search);
 
     await res.json(searchResults);
-
   });
 };
