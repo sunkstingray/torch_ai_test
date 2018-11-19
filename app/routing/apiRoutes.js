@@ -38,7 +38,7 @@ function makeObject(results) {
 module.exports = function(app) {
 
   app.post("/api/search", async function(req, res) {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
     const page = await browser.newPage();
     const url = "https://www.imdb.com";
 
