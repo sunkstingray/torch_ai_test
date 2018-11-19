@@ -9,7 +9,7 @@ const resultsObject = {
   Companies: []
 }
 
-// Function to build results object using headings to sort
+// Function to build results object using headings to sort into groups
 function makeObject(results) {
   let currentKey = "";
   let itemsProcessed = 0;
