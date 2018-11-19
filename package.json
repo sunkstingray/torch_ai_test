@@ -4,7 +4,7 @@
     "node": "10.13.0"
   },
   "version": "1.0.0",
-  "description": "",
+  "description": "none",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
