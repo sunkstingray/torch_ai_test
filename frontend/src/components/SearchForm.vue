@@ -4,7 +4,7 @@
     <div class="hero-body">
       <div class="container">
         <h1 class="title is-1">{{ msg }}</h1>
-        <p>Use the field below to scrape IMDB for Movies, TV Shows, Celebrities and more with Puppeteer.</p>
+        <p>Use the search field below to scrape IMDB for Movies, TV Shows, Celebrities and more!</p>
         <br>
         <form class="field has-addons has-addons-centered" v-on:submit.prevent>
           <div class="control">
@@ -22,6 +22,9 @@
       <span  class="icon is-large">
         <i class="fas fa-3x fa-spinner fa-pulse"></i>
       </span>
+    </p>
+    <p class="intro" v-if="introSeen">
+      Please enter search criteria above to see results here.
     </p>
     <div v-if="resultsSeen" class="box top-box">
       <h3 class="title is-3">Titles</h3>
@@ -41,13 +44,20 @@
         <li v-for="item in searchResults.Keywords" :key="item">{{ item }}</li>
       </ul>
     </div>
-    <div v-if="resultsSeen" class="box">
+    <div v-if="resultsSeen" class="box bottom-box">
       <h3 class="title is-3">Companies</h3>
       <ul>
         <li v-for="item in searchResults.Companies" :key="item">{{ item }}</li>
       </ul>
     </div>
   </section>
+  <footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <strong>IMDB Scraper</strong> by <a href="http://christopherlynam.com">Chris Lynam</a>.
+    </p>
+  </div>
+</footer>
 </div>
 </template>
 
@@ -64,6 +74,7 @@ export default {
       searchTerm: "",
       searchResults: [],
       resultsSeen: false,
+      introSeen: true,
       iconSeen: false
     }
   },
@@ -72,6 +83,7 @@ export default {
 
       this.iconSeen = true;
       this.resultsSeen = false;
+      this.introSeen = false;
 
       axios.post('/api/search', {
         search: searchTerm,
@@ -112,15 +124,20 @@ h3 {
 }
 
 input {
-  width: 70vw !important;
+  width: 50vw !important;
 }
 
-.spinner {
+.spinner, .intro {
   padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 .top-box {
   margin-top: 20px;
+}
+
+.bottom-box {
+  margin-bottom: 20px;
 }
 </style>
 
