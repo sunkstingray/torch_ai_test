@@ -1,5 +1,8 @@
 {
   "name": "torch_ai_test",
+  "engines": {
+    "node": "10.13.0"
+  },
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
