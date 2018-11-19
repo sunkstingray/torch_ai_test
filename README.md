@@ -9,7 +9,7 @@
 
 #### Technology Used:
 
-`HTML 5` `CSS 3` `Node.js` `Express.js` `Vue.js` `Puppeteer`
+`HTML 5` `CSS 3` `Node.js` `Express.js` `Vue.js` `Puppeteer` `Bulma CSS Framework`
 
 ## Instructions
 
@@ -20,10 +20,10 @@
 5. `npm install`
 6. `cd ..`
 7. `npm start`
-8. Then browse to `localhost:8080`
+8. Then browse to `localhost:8080` in web browser.
 
 ***OR***
 
-Link to Heroku hosted site: https://shielded-castle-10719.herokuapp.com/
+Go to Heroku hosted site: https://shielded-castle-10719.herokuapp.com/
 
 ![IMDB Scraper Screen Shot](screenshot.jpg)
